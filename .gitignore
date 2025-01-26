@@ -1,3 +1,14 @@
+# Utils
+CombineStagedGitDiffToOutput.ps1
+output.txt
+curl_output.html
+
+# Ignore application.properties
+application.properties
+
+# Ignore private certs
+certs/private
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

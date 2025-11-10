@@ -5,6 +5,7 @@ curl_output.html
 
 # Ignore application.properties
 application.properties
+application.yml
 
 # Ignore private certs
 certs/private

@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+wsfe:
+  environment: HOMO   # HOMO | PROD
+  # urlBase: ""       # opcional; si se deja vacío, el SDK usa el environment para resolver endpoints
+  proxy:
+    enabled: false
+    host: 127.0.0.1
+    port: 8080
+    # username:
+    # password:
+
+# Headers que la API acepta para credenciales WSFE (ver HeaderFeAuthParamsProvider)
+security:
+  headers:
+    token: X-WSFE-Token
+    sign: X-WSFE-Sign
+    cuit: X-WSFE-Cuit
+
+spring:
+  redis:
+    host: localhost     # si la API corre en tu máquina
+    port: 6379
+    timeout: 5s
+    # si usás docker-compose y la API corre dentro del mismo compose, usá:
+    # host: cache
+  cache:
+    type: redis         # activa cache Redis por defecto
+
+  # ======================
+  # 🔒 Vault Configuration
+  # ======================
+  cloud:
+    vault:
+      uri: http://localhost:8200     # o http://vault:8200 si usás Docker Compose
+      authentication: token          # métodos disponibles: token, approle, kubernetes, etc.
+      token: s.yourVaultTokenHere    # reemplazá por tu token o usá variable de entorno ${VAULT_TOKEN}
+      kv:
+        enabled: true
+        backend: secret              # nombre del engine KV
+        default-context: wsfe-api    # ruta base: secret/wsfe-api
